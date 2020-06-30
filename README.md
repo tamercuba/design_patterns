@@ -4,7 +4,7 @@
 
 
 ### Creational Patterns
-* 
+* [Builder](builder/)
 
 ### Structural Patterns
 * 
