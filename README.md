@@ -10,4 +10,4 @@
 * [Adapter](adapter/)
 
 ### Behavioral Patterns
-* 
+* [Observer](observer/)
