@@ -7,7 +7,7 @@
 * [Builder](builder/)
 
 ### Structural Patterns
-* 
+* [Adapter](adapter/)
 
 ### Behavioral Patterns
 * 
