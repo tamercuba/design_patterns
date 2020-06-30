@@ -22,3 +22,9 @@ style:
 requirements-pip:
 	@pip install --upgrade pip
 	@pip install -r requirements.txt
+
+new-pattern:
+	@mkdir ./$(name)
+	@touch ./$(name)/implementation.py
+	@echo "import implementation" > ./$(name)/__init__.py
+	@touch ./$(name)/README.md
