@@ -26,5 +26,12 @@ requirements-pip:
 new-pattern:
 	@mkdir ./$(name)
 	@touch ./$(name)/implementation.py
-	@echo "import implementation" > ./$(name)/__init__.py
+	@echo "import $(name).implementation" > ./$(name)/__init__.py
 	@touch ./$(name)/README.md
+	@touch ./$(name)/test_$(name).py
+
+test: clean
+	pytest -s -vvv
+
+test-matching: clean
+	py.test -k $(test) -s -vvv

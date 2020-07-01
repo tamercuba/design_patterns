@@ -84,16 +84,3 @@ class Director:
 
     def get_result(self) -> Product:
         return self._builder.product
-
-
-if __name__ == "__main__":
-    director = Director()
-    director.builder = Builder()
-
-    print('Build simple case: ')
-    director.build_simple()
-    print(director.get_result())
-
-    print('Build repeated case: ')
-    director.build_repeated()
-    print(director.get_result())
