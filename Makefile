@@ -28,3 +28,9 @@ new-pattern:
 	@touch ./$(name)/implementation.py
 	@echo "import implementation" > ./$(name)/__init__.py
 	@touch ./$(name)/README.md
+
+test: clean
+	pytest -s -vvv
+
+test-matching: clean  ## Run only tests matching pattern. E.g.: make test-matching test=TestClassName
+	py.test -k $(test) -s -vvv

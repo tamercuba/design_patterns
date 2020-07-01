@@ -1,14 +1,15 @@
 from abc import ABC, abstractmethod
-from typing import List
-import random
+from typing import Any, List
+
 
 class Observer(ABC):
     @abstractmethod
-    def notify(self) -> None:
+    def notify(self, event: Any) -> None:
         raise NotImplementedError
 
     def __str__(self) -> str:
         return self._NAME
+
 
 class Subject:
     _state: int = None
@@ -18,55 +19,44 @@ class Subject:
         """
         registerObserver on UML
         """
-        print(f'Subject: Attached {observer}.')
         self._observers.append(observer)
 
     def dettach(self, observer: Observer) -> None:
         """
         unregisterObserver on UML
         """
-        print(f'Subject: Dettached {observer}.')
         self._observers.remove(observer)
 
     def notify_observers(self) -> None:
         """
         notifyObserver on UML
         """
+        result = []
         for observer in self._observers:
-            observer.notify(event=self._state)
+            notification = observer.notify(event=self._state)
+            if notification:
+                result.append(notification)
 
-    def business_logic(self) -> None:
-        self._state = random.randint(0, 10)
-        self.notify_observers()
+        return result
+
+    def business_logic(self, state) -> None:
+        self._state = state
+        return self.notify_observers()
+
 
 class ConcreteObserverA(Observer):
-    _NAME = 'Concrete Observer A'
-    def notify(self, event: int) -> None:
+    _NAME = 'Event A'
+
+    def notify(self, event: int) -> str:
         if event < 4:
-            print(f'{self._NAME}: Event trigged')
+            return self._NAME
+        return None
+
 
 class ConcreteObserverB(Observer):
-    _NAME = 'Concrete Observer B'
-    def notify(self, event: int) -> None:
-        if event % 2:
-            print(f'{self._NAME}: Event trigged')
+    _NAME = 'Event B'
 
-
-if __name__ == '__main__':
-    subject = Subject()
-
-    observer_a = ConcreteObserverA()
-    observer_b = ConcreteObserverB()
-
-    subject.attach(observer_a)
-    subject.attach(observer_b)
-
-    subject.business_logic()
-    subject.business_logic()
-    subject.business_logic()
-
-    subject.dettach(observer_a)
-
-    subject.business_logic()
-    subject.business_logic()
-    subject.business_logic()
+    def notify(self, event: int) -> str:
+        if not event % 2:
+            return self._NAME
+        return None
